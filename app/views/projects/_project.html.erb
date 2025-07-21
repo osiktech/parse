@@ -2,6 +2,18 @@
   <p>
     <strong>Name:</strong>
     <%= project.name %>
+    <% if project.subprojects.any? %>
+      <ul>
+        <% project.subprojects.each do |subproject| %>
+          <li>
+            <%= link_to "#{subproject.subproject_name}", subproject_path(subproject) %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No subprojects</p>
+    <% end %>
+
   </p>
 
 </div>

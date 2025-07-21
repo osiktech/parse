@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
-    @projects = Project.all
+    @projects = Project.includes(:subprojects => [:client, :owner, :builder]).all
   end
 
   # GET /projects/1 or /projects/1.json
@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
-    @project.subprojects.build # initialize one subproject
+    @project.subprojects.build
     @project.subprojects.each do |subproject|
       subproject.build_client
       subproject.build_owner
