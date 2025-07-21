@@ -11,17 +11,17 @@
 
   <p>
     <strong>Client:</strong>
-    <%= subproject.client_id %>
+    <%= link_to "#{subproject.client&.company_name} (#{subproject.client&.lastname}, #{subproject.client&.firstname})", client_path(subproject.client&.id) %>
   </p>
 
   <p>
     <strong>Owner:</strong>
-    <%= subproject.owner_id %>
+    <%= link_to "#{subproject.owner&.company_name} (#{subproject.owner&.lastname}, #{subproject.owner&.firstname})", client_path(subproject.owner&.id) %>
   </p>
 
   <p>
     <strong>Builder:</strong>
-    <%= subproject.builder_id %>
+    <%= link_to "#{subproject.builder&.company_name} (#{subproject.builder&.lastname}, #{subproject.builder&.firstname})", client_path(subproject.builder&.id) %>
   </p>
 
 </div>

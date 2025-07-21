@@ -3,7 +3,7 @@ class SubprojectsController < ApplicationController
 
   # GET /subprojects or /subprojects.json
   def index
-    @subprojects = Subproject.all
+    @subprojects = Subproject.includes(:client).all
   end
 
   # GET /subprojects/1 or /subprojects/1.json
