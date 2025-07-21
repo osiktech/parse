@@ -14,6 +14,8 @@ class Subproject < ApplicationRecord
   validate :owner_presence_check
   validate :builder_presence_check
 
+  validates_associated :client, :owner, :builder
+
   def client_attributes=(attributes)
     self.client = Client.find_or_initialize_by(email: attributes[:email])
     self.client.assign_attributes(attributes)
