@@ -15,7 +15,6 @@ class Subproject < ApplicationRecord
   validate :builder_presence_check
 
   private
-  private
 
   def client_presence_check
     if client_id.blank? && (client_attributes_blank?)
@@ -42,12 +41,12 @@ class Subproject < ApplicationRecord
 
   def owner_attributes_blank?
     return true if client.nil?
-    owner_attributes.except("id", "created_at", "updated_at").values.all?(&:blank?)
+    owner.attributes.except("id", "created_at", "updated_at").values.all?(&:blank?)
   end
 
   def builder_attributes_blank?
     return true if client.nil?
-    builder_attributes.except("id", "created_at", "updated_at").values.all?(&:blank?)
+    builder.attributes.except("id", "created_at", "updated_at").values.all?(&:blank?)
   end
 
 end
