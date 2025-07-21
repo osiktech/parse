@@ -11,10 +11,12 @@
     </div>
   <% end %>
 
+  <% [:name, :email, :short_name, :offer_date, :order_date].each do |prj_attrib| %>
   <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.label prj_attrib, style: "display: block" %>
+    <%= form.text_field prj_attrib %>
   </div>
+  <% end %>
 
   <h3>Subprojects</h3>
   <%= form.fields_for :subprojects do |sp_form| %>
@@ -30,7 +32,7 @@
           <fieldset>
             <legend>Or Create New <%= role.capitalize %></legend>
             <%= sp_form.fields_for role do |c_form| %>
-              <% [:company_name, :firstname, :lastname, :streetname, :zipcode, :city, :country, :email, :phone].each do |attrib|%>
+              <% [:company_name, :firstname, :lastname, :streetname, :zipcode, :city, :country, :email, :phone].each do |attrib| %>
                 <%= c_form.label attrib %>
                 <%= c_form.text_field attrib %><br>
               <% end %>
