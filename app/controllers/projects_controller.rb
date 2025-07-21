@@ -64,6 +64,9 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  CLIENT_FIELDS = [:company_name, :firstname, :lastname, :streetname, :zipcode, :city, :country, :email, :phone]
+
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.find(params.expect(:id))
@@ -75,9 +78,9 @@ class ProjectsController < ApplicationController
         :name, :email, :short_name,
         subprojects_attributes: [
           :id, :subproject_name, :client_id, :owner_id, :builder_id, :_destroy,
-          client_attributes: [:company_name, :firstname, :lastname, :streetname, :zipcode, :city, :country, :email, :phone],
-          owner_attributes: [:company_name, :firstname, :lastname, :streetname, :zipcode, :city, :country, :email, :phone],
-          builder_attributes: [:company_name, :firstname, :lastname, :streetname, :zipcode, :city, :country, :email, :phone]
+          client_attributes: CLIENT_FIELDS,
+          owner_attributes: CLIENT_FIELDS,
+          builder_attributes: CLIENT_FIELDS
         ]
       )
     end
