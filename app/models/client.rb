@@ -5,4 +5,12 @@ class Client < ApplicationRecord
 
   validates :company_name, :firstname, :lastname, presence: true
   # Add other validations as needed
+
+  def referenced_count
+    owner_subprojects.count + builder_subprojects.count + client_subprojects.count
+  end
+
+  def editable?
+    referenced_count <= 1
+  end
 end
