@@ -3,8 +3,7 @@ class Client < ApplicationRecord
   has_many :owner_subprojects, class_name: 'Subproject', foreign_key: 'owner_id'
   has_many :builder_subprojects, class_name: 'Subproject', foreign_key: 'builder_id'
 
-  validates :company_name, :firstname, :lastname, presence: true
-  # Add other validations as needed
+  validates :company_name, :firstname, :lastname, :email, presence: true
 
   def referenced_count
     owner_subprojects.count + builder_subprojects.count + client_subprojects.count
