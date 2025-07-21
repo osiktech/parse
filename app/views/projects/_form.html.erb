@@ -25,20 +25,15 @@
       <% [:client, :owner, :builder].each do |role| %>
         <div>
           <%= sp_form.label "#{role}_id", "Select Existing #{role.capitalize}" %>
-          <%= sp_form.collection_select "#{role}_id", Client.all, :id, :company_name, prompt: "Select #{role.capitalize}" %>
+          <%= sp_form.collection_select "#{role}_id", Client.all, :id, -> (client) { "#{client.company_name} (#{client.lastname}, #{client.firstname})" }, prompt: "Select #{role.capitalize}" %>
 
           <fieldset>
             <legend>Or Create New <%= role.capitalize %></legend>
             <%= sp_form.fields_for role do |c_form| %>
-              <%= c_form.label :company_name %>
-              <%= c_form.text_field :company_name %><br>
-              <%= c_form.label :firstname %>
-              <%= c_form.text_field :firstname %><br>
-              <%= c_form.label :lastname %>
-              <%= c_form.text_field :lastname %><br>
-              <%= c_form.label :email %>
-              <%= c_form.text_field :email %><br>
-              <!-- Add more client fields here as needed -->
+              <% [:company_name, :firstname, :lastname, :streetname, :zipcode, :city, :country, :email, :phone].each do |attrib|%>
+                <%= c_form.label attrib %>
+                <%= c_form.text_field attrib %><br>
+              <% end %>
             <% end %>
           </fieldset>
         </div>
