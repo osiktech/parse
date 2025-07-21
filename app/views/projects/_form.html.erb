@@ -1,0 +1,52 @@
+<%= form_with(model: project) do |form| %>
+  <% if project.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+        <% project.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <h3>Subprojects</h3>
+  <%= form.fields_for :subprojects do |sp_form| %>
+    <div class="subproject-fields">
+      <%= sp_form.label :subproject_name %>
+      <%= sp_form.text_field :subproject_name %>
+
+      <% [:client, :owner, :builder].each do |role| %>
+        <div>
+          <%= sp_form.label "#{role}_id", "Select Existing #{role.capitalize}" %>
+          <%= sp_form.collection_select "#{role}_id", Client.all, :id, :company_name, prompt: "Select #{role.capitalize}" %>
+
+          <fieldset>
+            <legend>Or Create New <%= role.capitalize %></legend>
+            <%= sp_form.fields_for role do |c_form| %>
+              <%= c_form.label :company_name %>
+              <%= c_form.text_field :company_name %><br>
+              <%= c_form.label :firstname %>
+              <%= c_form.text_field :firstname %><br>
+              <%= c_form.label :lastname %>
+              <%= c_form.text_field :lastname %><br>
+              <%= c_form.label :email %>
+              <%= c_form.text_field :email %><br>
+              <!-- Add more client fields here as needed -->
+            <% end %>
+          </fieldset>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

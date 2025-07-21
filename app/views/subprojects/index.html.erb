@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Subprojects" %>
+
+<h1>Subprojects</h1>
+
+<div id="subprojects">
+  <% @subprojects.each do |subproject| %>
+    <%= render subproject %>
+    <p>
+      <%= link_to "Show this subproject", subproject %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New subproject", new_subproject_path %>

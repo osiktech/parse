@@ -1,0 +1,11 @@
+<% content_for :title, "New subproject" %>
+
+<h1>New subproject</h1>
+
+<%= render "form", subproject: @subproject %>
+
+<br>
+
+<div>
+  <%= link_to "Back to subprojects", subprojects_path %>
+</div>
