@@ -14,6 +14,21 @@ class Subproject < ApplicationRecord
   validate :owner_presence_check
   validate :builder_presence_check
 
+  def client_attributes=(attributes)
+    self.client = Client.find_or_initialize_by(email: attributes[:email])
+    self.client.assign_attributes(attributes)
+  end
+
+  def owner_attributes=(attributes)
+    self.owner = Client.find_or_initialize_by(email: attributes[:email])
+    self.owner.assign_attributes(attributes)
+  end
+
+  def builder_attributes=(attributes)
+    self.builder = Client.find_or_initialize_by(email: attributes[:email])
+    self.builder.assign_attributes(attributes)
+  end
+
   private
 
   def client_presence_check
